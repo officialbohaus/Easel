@@ -1,6 +1,6 @@
 # Easel
 
-## Deployment Instructions
+## EC2 Deployment Instructions
 ```bash
 #!/bin/bash
 set -e
@@ -78,3 +78,43 @@ sudo systemctl restart nginx
 
 echo "Easel deployment complete!"
 ```
+
+---
+## Local Repo Setup
+### Prerequisites:
+Ensure Python 3.11+, PostgreSQL, and Git are installed.
+
+### Clone Repository:
+
+```bash
+git clone https://github.com/your-repo/easel.git
+cd easel
+```
+### Environment Setup:
+
+```bash
+python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
+```
+### Environment Variables Configuration:
+Create a .env file in the project root:
+
+```
+FLASK_APP=app.py
+FLASK_ENV=development
+SECRET_KEY=your_secret_key_here
+DATABASE_URL=postgresql://postgres:password@localhost:5432/easel_db
+UPLOAD_FOLDER=./uploads
+```
+### Database Initialization:
+
+```bash
+flask db upgrade
+```
+### Run Application:
+
+```bash
+flask run --port=5000
+```
+Navigate to [http://127.0.0.1:5000](http://127.0.0.1:5000) in your web browser.
